@@ -1,0 +1,5 @@
+build --@rules_go//go/config:pure
+build --@rules_go//go/config:static
+build --features=-cgo
+build --host_platform=@rules_go//go/toolchain:darwin_arm64
+build --platforms=@rules_go//go/toolchain:darwin_arm64
