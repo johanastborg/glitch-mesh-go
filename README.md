@@ -4,21 +4,19 @@
 [![Bazel](https://img.shields.io/badge/Bazel-powered-00CC00?style=for-the-badge&logo=bazel)](https://bazel.build)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
-> A high-performance, experimental service mesh control plane and edge proxy implementation in Go, powered by Bazel.
+> A lightweight local xDS control plane for gRPC development, serving as a local-first alternative to Google Cloud Traffic Director.
 
 ---
 
-## 🚀 Overview
-
-**Glitch Mesh Go** is a next-generation exploration into service mesh architectures, focusing on resilience, observability, and "glitch" (fault-injection) testing. Built with a modern Go stack and the hermetic build power of Bazel, it aims to provide a robust yet flexible foundation for cloud-native networking.
+**Glitch Mesh Go** is a specialized control plane designed to accelerate local gRPC development. It implements a subset of the xDS APIs to provide a seamless, local-first testing environment for services that would typically rely on **Google Cloud Traffic Director**. By cutting out cloud latency and configuration overhead, it allows developers to iterate on mesh networking logic directly on their workstations.
 
 ## ✨ Features (Planned)
 
-- [ ] **xDS Control Plane**: Full support for gRPC-based xDS APIs to configure sidecar proxies.
-- [ ] **Real-time Observability**: SSE (Server-Sent Events) and gRPC streaming for live telemetry.
-- [ ] **Fault Injection**: Built-in "Glitch" engine to simulate network latency, partitions, and errors.
-- [ ] **Hermetic Builds**: Fully managed toolchains and dependencies via Bazel Bzlmod.
-- [ ] **Cloud Native**: Designed for seamless deployment on Kubernetes and Google Cloud Run.
+- [ ] **xDS Control Plane**: Lightweight implementation of gRPC-compliant xDS APIs (LDS, RDS, CDS, EDS).
+- [ ] **Traffic Director Alternative**: Drop-in local replacement for testing gRPC mesh configurations without GCP.
+- [ ] **Live Debugging**: SSE (Server-Sent Events) and gRPC streaming for real-time traffic view.
+- [ ] **Glitch Injection**: Simulate network failures and latency locally to test application resilience.
+- [ ] **Bazel-Powered**: Hermetic, reproducible builds via Bzlmod for consistent dev environments.
 
 ## 🛠 Tech Stack
 
@@ -26,6 +24,17 @@
 - **Build System**: [Bazel](https://bazel.build) (Bzlmod)
 - **Communication**: gRPC, Protobuf, SSE
 - **Automation**: Gazelle for Bazel metadata management
+
+## 📂 Project Structure
+
+```text
+.
+├── BUILD.bazel          # Root build definitions & Gazelle config
+├── MODULE.bazel         # Bazel module & dependency management
+├── main.go              # Application entry point
+├── go.mod               # Go module definition (mirrored in Bazel)
+└── README.md            # You are here
+```
 
 ## 🏗 Getting Started
 
@@ -68,9 +77,9 @@ We use a modern Bazel-first workflow. All dependencies are defined in `MODULE.ba
 ## 🗺 Roadmap
 
 - [x] Initial Bazel + Go Project Setup
-- [ ] Implement Basic SSE Streaming Server
-- [ ] Integrate gRPC xDS Control Plane
-- [ ] Add OCI Container Support for Cloud Run
+- [ ] Implement Basic SSE Streaming Server for Observability
+- [ ] Implement Core xDS APIs (LDS/RDS/CDS/EDS) for gRPC
+- [ ] Docker Support for unified local development environments
 
 ---
 
